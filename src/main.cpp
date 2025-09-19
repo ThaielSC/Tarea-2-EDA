@@ -1,4 +1,4 @@
-#include <iomanip>
+#include <future>
 #include <iostream>
 #include <vector>
 
@@ -6,44 +6,37 @@
 #include "structures/dataSet.hpp"
 #include "utils/benchmark.hpp"
 
-// Helper function to print a vector of strings
-void printVector(const std::string& label,
-                 const std::vector<std::string>& vec) {
-  std::cout << label << ": ";
-  for (const auto& s : vec) {
-    std::cout << s << " ";
-  }
-  std::cout << std::endl;
-}
-
 int main() {
   Benchmark b;
-  std::vector<DataSet> datasets;
 
   std::vector<std::string> paths = {"data/codes_500K.txt", "data/codes_1M.txt",
                                     "data/codes_10M.txt"};
+  std::vector<DataSet> datasets;
 
-  for (const auto& path : paths) {
+  // --- Parallel File Loading ---
+  std::cout << "Cargando archivos en paralelo:" << std::endl;
+
+  auto load_dataset = [](const std::string& path) {
+    std::cout << "  -> Cargando " << path << "..." << std::endl;
     DataSet ds(path);
     ds.load();
-    datasets.push_back(std::move(ds));
+    return ds;
+  };
+
+  std::vector<std::future<DataSet>> futures;
+  for (const auto& path : paths) {
+    futures.push_back(std::async(std::launch::async, load_dataset, path));
   }
 
-  std::cout << std::left << std::setw(24) << "Files" << "Items" << std::endl;
-  std::cout << std::endl;
-
-  for (auto& ds : datasets) {
-    std::cout << std::left << std::setw(24) << ds.getFilePath() << ds.getSize()
-              << std::endl;
+  for (auto& f : futures) {
+    datasets.push_back(f.get());
   }
+  std::cout << "Carga completada." << std::endl << std::endl;
+  // --- End of Parallel File Loading ---
 
-  // Benchmark the 500K dataset
   if (!datasets.empty()) {
-    std::cout << std::endl
-              << "--- Running Benchmark on 500K dataset ---" << std::endl;
-    b.run(radixSort, 5, datasets[0].getData());
+    b.run(radixSort, datasets[0]);
     b.report();
-    std::cout << "--- Benchmark Finished ---" << std::endl;
   }
 
   std::cout << std::endl << "Presiona `q` para salir..." << std::endl;
