@@ -1,9 +1,28 @@
-#include <algorithm>
 #include <numeric>
 
 #include "utils/benchmark.hpp"
 
 Benchmark::Benchmark() = default;
+
+std::vector<int> Benchmark::run(
+    std::function<std::vector<int>(const std::vector<std::string>&)>
+        sorterAlgorithm,
+    DataSet& data, size_t times) {
+  std::vector<int> sorted;
+
+  for (size_t i = 0; i < times; i++) {
+    auto start_time = std::chrono::high_resolution_clock::now();
+    sorted = sorterAlgorithm(data.getData());
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+
+    auto duracion = std::chrono::duration_cast<std::chrono::milliseconds>(
+        end_time - start_time);
+
+    results.push_back(duracion.count());
+  }
+  return sorted;
+}
 
 void Benchmark::report(std::ostream& os) const {
   if (results.empty()) {
