@@ -5,31 +5,26 @@
 #include <vector>
 
 #include "structures/dataSet.hpp"
+#include "utils/rbenchmark.hpp"
 
 class Benchmark {
  private:
-  std::vector<double> results;
-  std::vector<int> orderIndex;
+  std::vector<RBenchmark> results;
+  DataSet& data;
 
  public:
-  Benchmark();
+  Benchmark(DataSet&);
 
   std::vector<int> run(
       std::function<std::vector<int>(const std::vector<std::string>&)>
           sorterAlgorithm,
-      DataSet& data, size_t times = 5);
+      std::string name, size_t times = 5);
 
   // Reporta resultados al ostream (por defecto std::cout)
   void report(std::ostream& os = std::cout) const;
 
   // Acceso directo a los resultados
-  const std::vector<double>& getResults() const;
-
-  // Ejecuta la función 'repeat' veces y almacena los tiempos
-  // template <typename Func, typename... Args>
-  // void run(Func func, int repeat, Args&&... args);
+  const std::vector<RBenchmark>& getResults() const;
 };
-
-// #include "benchmark.tpp"  // Incluir implementación de métodos template
 
 #endif  // BENCHMARK_HPP

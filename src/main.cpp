@@ -7,14 +7,11 @@
 #include "utils/benchmark.hpp"
 
 int main() {
-  Benchmark b;
-
   std::vector<std::string> paths = {"data/codes_500K.txt", "data/codes_1M.txt",
                                     "data/codes_10M.txt"};
   std::vector<DataSet> datasets;
 
-  // --- Parallel File Loading ---
-  std::cout << "Cargando archivos en paralelo:" << std::endl;
+  std::cout << "Cargando archivos:" << std::endl;
 
   auto load_dataset = [](const std::string& path) {
     std::cout << "  -> Cargando " << path << "..." << std::endl;
@@ -31,11 +28,15 @@ int main() {
   for (auto& f : futures) {
     datasets.push_back(f.get());
   }
+
+  Benchmark b(datasets[0]);
+
   std::cout << "Carga completada." << std::endl << std::endl;
-  // --- End of Parallel File Loading ---
 
   if (!datasets.empty()) {
-    b.run(radixSort, datasets[0]);
+    b.run(radixSort, "Radix Sort");
+    // b.run(mergeSort, "Merge Sort");
+    // b.run(quickSort, "Quick Sort");
     b.report();
   }
 
