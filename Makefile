@@ -36,7 +36,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 # Rule to run the program
 run: all
 	@echo "Running program..."
-	@./$(TARGET) | less
+	@./$(TARGET) | less -c
 
 # Rule to clean the project
 clean:
