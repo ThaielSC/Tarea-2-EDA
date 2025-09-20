@@ -1,10 +1,12 @@
+#include <algorithm>
+#include <cmath>
 #include <numeric>
 
 #include "utils/rbenchmark.hpp"
 
 void RBenchmark::add(double duration) { result.push_back(duration); }
 
-void RBenchmark::show(std::ostream& os) const {
+void RBenchmark::show(std::ostream &os) const {
   if (result.empty()) {
     os << "No se han registrado resultados.\n";
     return;

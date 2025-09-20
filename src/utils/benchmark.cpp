@@ -1,15 +1,16 @@
+#include <chrono>
 #include <string>
 #include <vector>
 
 #include "structures/dataSet.hpp"
 #include "utils/benchmark.hpp"
 
-Benchmark::Benchmark(DataSet& data) : data(data) {};
+Benchmark::Benchmark(DataSet &data) : data(data) {};
 
-std::vector<int> Benchmark::run(
-    std::function<std::vector<int>(const std::vector<std::string>&)>
-        sorterAlgorithm,
-    std::string name, size_t times) {
+std::vector<int>
+Benchmark::run(std::function<std::vector<int>(const std::vector<std::string> &)>
+                   sorterAlgorithm,
+               std::string name, size_t times) {
   std::vector<int> sorted;
   RBenchmark result = RBenchmark(name);
 
@@ -28,11 +29,11 @@ std::vector<int> Benchmark::run(
   return sorted;
 }
 
-void Benchmark::report(std::ostream& os) const {
+void Benchmark::report(std::ostream &os) const {
   os << std::endl << "Dataset: " << data.getSize() << std::endl << std::endl;
   for (RBenchmark result : results) {
     result.show();
   }
 }
 
-const std::vector<RBenchmark>& Benchmark::getResults() const { return results; }
+const std::vector<RBenchmark> &Benchmark::getResults() const { return results; }
