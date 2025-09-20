@@ -19,17 +19,17 @@ std::vector<int> Benchmark::run(
 
     auto end_time = std::chrono::high_resolution_clock::now();
 
-    auto duracion = std::chrono::duration_cast<std::chrono::milliseconds>(
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
         end_time - start_time);
 
-    result.add(duracion.count());
+    result.add(duration.count());
   }
   results.push_back(result);
   return sorted;
 }
 
 void Benchmark::report(std::ostream& os) const {
-  os << "Dataset: " << data.getSize() << std::endl;
+  os << std::endl << "Dataset: " << data.getSize() << std::endl << std::endl;
   for (RBenchmark result : results) {
     result.show();
   }

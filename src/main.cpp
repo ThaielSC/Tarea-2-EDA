@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+#include "algorithms/mergeSort.hpp"
+#include "algorithms/quickSort.hpp"
 #include "algorithms/radixSort.hpp"
 #include "structures/dataSet.hpp"
 #include "utils/benchmark.hpp"
@@ -29,15 +31,26 @@ int main() {
     datasets.push_back(f.get());
   }
 
-  Benchmark b(datasets[0]);
+  Benchmark small_bench(datasets[0]);
+  Benchmark medium_bench(datasets[1]);
+  Benchmark big_bench(datasets[2]);
 
   std::cout << "Carga completada." << std::endl << std::endl;
 
   if (!datasets.empty()) {
-    b.run(radixSort, "Radix Sort");
-    // b.run(mergeSort, "Merge Sort");
-    // b.run(quickSort, "Quick Sort");
-    b.report();
+    small_bench.run(radixSort, "Radix Sort");
+    small_bench.run(mergeSort, "Merge Sort");
+    small_bench.run(quickSort, "Quick Sort");
+    medium_bench.run(radixSort, "Radix Sort");
+    medium_bench.run(mergeSort, "Merge Sort");
+    medium_bench.run(quickSort, "Quick Sort");
+    big_bench.run(radixSort, "Radix Sort");
+    big_bench.run(mergeSort, "Merge Sort");
+    big_bench.run(quickSort, "Quick Sort");
+
+    small_bench.report();
+    medium_bench.report();
+    big_bench.report();
   }
 
   std::cout << std::endl << "Presiona `q` para salir..." << std::endl;

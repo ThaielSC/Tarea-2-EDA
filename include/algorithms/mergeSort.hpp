@@ -3,6 +3,6 @@
 
 #include <vector>
 
-void mergeSort(std::vector<int>& arr);
+std::vector<int> mergeSort(const std::vector<std::string>& data);
 
 #endif  // MERGE_SORT_HPP

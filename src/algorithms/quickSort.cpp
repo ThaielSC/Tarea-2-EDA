@@ -1,5 +1,6 @@
 #include "algorithms/quickSort.hpp"
 
-void quickSort(std::vector<int>& arr) {
+std::vector<int> quickSort(const std::vector<std::string>& data) {
   // TODO: Implement Quick Sort algorithm
+  return {};
 }

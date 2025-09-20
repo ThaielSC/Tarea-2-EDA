@@ -3,6 +3,6 @@
 
 #include <vector>
 
-void quickSort(std::vector<int>& arr);
+std::vector<int> quickSort(const std::vector<std::string>& data);
 
 #endif  // QUICK_SORT_HPP
