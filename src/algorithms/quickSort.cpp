@@ -7,8 +7,8 @@
 #include <tuple>
 #include <vector>
 
-std::tuple<std::function<int(const std::vector<std::string>&, int, int)>,
-           std::reference_wrapper<std::vector<int>>>
+static std::tuple<std::function<int(const std::vector<std::string>&, int, int)>,
+                  std::reference_wrapper<std::vector<int>>>
 createSplitFunc(int n) {
   static std::vector<int> indexes(n);
   srand(time(NULL));
@@ -36,7 +36,7 @@ createSplitFunc(int n) {
   return std::make_tuple(split, std::ref(indexes));
 }
 
-void recursiveQuickSort(
+static void recursiveQuickSort(
     const std::vector<std::string>& A, std::vector<int>& indexes,
     const std::function<int(const std::vector<std::string>&, int, int)>& split,
     int i, int j) {

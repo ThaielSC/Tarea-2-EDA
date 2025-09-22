@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-int split_qs(const std::vector<std::string>& data);
-
 std::vector<int> quickSort(const std::vector<std::string>& data);
 
-#endif  // QUICK_SORT_HPP
+#endif

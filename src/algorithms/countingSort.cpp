@@ -3,7 +3,7 @@
 #include "algorithms/countingSort.hpp"
 #include "structures/linkedList.hpp"
 
-int getCharValue(char c) {
+static int getCharValue(char c) {
   if (c >= '0' && c <= '9') {
     return c - '0';
   } else if (c >= 'A' && c <= 'Z') {

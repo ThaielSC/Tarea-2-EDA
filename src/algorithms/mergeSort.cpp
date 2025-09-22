@@ -1,18 +1,16 @@
-#include "algorithms/mergeSort.hpp"
-#include <iostream>
 #include <numeric>
 
-void merge(const std::vector<std::string>& data, std::vector<int>& indices,
-           int left, int mid, int right) {
+#include "algorithms/mergeSort.hpp"
+
+static void merge(const std::vector<std::string>& data,
+                  std::vector<int>& indices, int left, int mid, int right) {
   int n1 = mid - left + 1;
   int n2 = right - mid;
 
   std::vector<int> L(n1), R(n2);
 
-  for (int i = 0; i < n1; i++)
-    L[i] = indices[left + i];
-  for (int j = 0; j < n2; j++)
-    R[j] = indices[mid + 1 + j];
+  for (int i = 0; i < n1; i++) L[i] = indices[left + i];
+  for (int j = 0; j < n2; j++) R[j] = indices[mid + 1 + j];
 
   int i = 0;
   int j = 0;
@@ -42,8 +40,8 @@ void merge(const std::vector<std::string>& data, std::vector<int>& indices,
   }
 }
 
-void mergeSortRecursive(const std::vector<std::string>& data,
-                        std::vector<int>& indices, int left, int right) {
+static void mergeSortRecursive(const std::vector<std::string>& data,
+                               std::vector<int>& indices, int left, int right) {
   if (left < right) {
     int mid = left + (right - left) / 2;
     mergeSortRecursive(data, indices, left, mid);
