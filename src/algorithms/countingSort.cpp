@@ -21,7 +21,7 @@ void countingSort(const std::vector<std::string>& data,
 
   for (size_t i = 0; i < n; ++i) {
     int index = indices[i];
-    int char_pos = p - 1;
+    size_t char_pos = p - 1;
     if (char_pos < 0 || char_pos >= data[index].length()) continue;
 
     int value = getCharValue(data[index][char_pos]);
