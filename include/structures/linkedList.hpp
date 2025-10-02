@@ -1,0 +1,5 @@
+#ifndef LINKEDLIST_HPP
+#define LINKEDLIST_HPP
+
+
+#endif // LINKEDLIST_HPP
