@@ -8,15 +8,16 @@
     - La inserción debe tener un costo de O(1).
     - Debe almacenar la posición de los códigos, no los valores.
 
-- [ ] **Implementar Algoritmos de Ordenamiento:**
-    - [ ] Implementar `RadixSort` usando `CountingSort` como base (seguir Algoritmo 2).
+- [X] **Implementar Algoritmos de Ordenamiento:**
+    - [X] Implementar `RadixSort` usando `CountingSort` como base (seguir Algoritmo 2).
     - [X] Implementar `QuickSort`.
     - [X] Implementar `MergeSort`.
 
-- [x] **Medición de Rendimiento:**
-    - [ ] Ejecutar cada algoritmo de ordenamiento con los 3 conjuntos de datos (`500K`, `1M`, `10M`).
-    - [ ] Correr cada experimento 5 veces.
-    - [ ] Calcular el tiempo de ejecución promedio y la desviación estándar.
+- [ ] **Medición de Rendimiento:**
+    - [X] Ejecutar cada algoritmo de ordenamiento con los 3 conjuntos de datos (`500K`, `1M`, `10M`).
+    - [X] Correr cada experimento 5 veces.
+    - [X] Calcular el tiempo de ejecución promedio y la desviación estándar.
+    - [ ] Crear gráficos comparando rendimiento con base al dataset
 
 - [x] **README.md:**
     - [x] Añadir los pasos para compilar y ejecutar el proyecto.
