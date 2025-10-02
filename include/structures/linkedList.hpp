@@ -6,9 +6,11 @@
 class LinkedList {
 private:
   Node *head;
+  Node *tail;
 
 public:
   LinkedList();
+  Node *getHead();
   void insertFirst(int);
   void insertLast(int);
   void removeFirst();

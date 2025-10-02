@@ -15,7 +15,7 @@ int main() {
 
   std::cout << "Cargando archivos:" << std::endl;
 
-  auto load_dataset = [](const std::string& path) {
+  auto load_dataset = [](const std::string &path) {
     std::cout << "  -> Cargando " << path << "..." << std::endl;
     DataSet ds(path);
     ds.load();
@@ -23,11 +23,11 @@ int main() {
   };
 
   std::vector<std::future<DataSet>> futures;
-  for (const auto& path : paths) {
+  for (const auto &path : paths) {
     futures.push_back(std::async(std::launch::async, load_dataset, path));
   }
 
-  for (auto& f : futures) {
+  for (auto &f : futures) {
     datasets.push_back(f.get());
   }
 
@@ -38,7 +38,7 @@ int main() {
   std::cout << "Carga completada." << std::endl << std::endl;
 
   if (!datasets.empty()) {
-    // small_bench.run(radixSort, "Radix Sort");
+    small_bench.run(radixSort, "Radix Sort");
     small_bench.run(quickSort, "Quick Sort");
     small_bench.run(mergeSort, "Merge Sort");
     // medium_bench.run(radixSort, "Radix Sort");

@@ -1,12 +1,13 @@
 #include "structures/linkedList.hpp"
 #include <iostream>
 
-LinkedList::LinkedList() : head(nullptr) {}
+LinkedList::LinkedList() : head(nullptr), tail(nullptr) {}
 
 void LinkedList::insertFirst(int val) {
   Node *node = new Node(val);
   if (head == nullptr) {
     head = node;
+    tail = node;
   } else {
     node->setNext(head);
     head = node;
@@ -18,12 +19,10 @@ void LinkedList::insertLast(int val) {
 
   if (head == nullptr) {
     head = node;
+    tail = node;
   } else {
-    Node *ptr = head;
-    while (ptr->getNext() != nullptr) {
-      ptr = ptr->getNext();
-    }
-    ptr->setNext(node);
+    tail->setNext(node);
+    tail = node;
   }
 }
 
@@ -33,6 +32,9 @@ void LinkedList::removeFirst() {
   if (head != nullptr) {
     head = head->getNext();
     delete ptr;
+    if (head == nullptr) {
+      tail = nullptr;
+    }
   }
 }
 
@@ -82,5 +84,7 @@ void LinkedList::print() {
   }
   std::cout << std::endl;
 }
+
+Node *LinkedList::getHead() { return head; }
 
 LinkedList::~LinkedList() { removeAll(); }
