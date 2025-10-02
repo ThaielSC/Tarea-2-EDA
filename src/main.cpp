@@ -39,7 +39,7 @@ int main() {
 
   if (!datasets.empty()) {
     // small_bench.run(radixSort, "Radix Sort");
-    // small_bench.run(quickSort, "Quick Sort");
+    small_bench.run(quickSort, "Quick Sort");
     small_bench.run(mergeSort, "Merge Sort");
     // medium_bench.run(radixSort, "Radix Sort");
     // medium_bench.run(mergeSort, "Merge Sort");
