@@ -3,15 +3,15 @@
 ## TODO
 
 - [X] **Cargar `Data Set`.**
-- [ ] **Implementar Lista Enlazada:**
+- [X] **Implementar Lista Enlazada:**
     - Debe ser una lista enlazada simple.
     - La inserción debe tener un costo de O(1).
     - Debe almacenar la posición de los códigos, no los valores.
 
 - [ ] **Implementar Algoritmos de Ordenamiento:**
     - [ ] Implementar `RadixSort` usando `CountingSort` como base (seguir Algoritmo 2).
-    - [ ] Implementar `QuickSort`.
-    - [ ] Implementar `MergeSort`.
+    - [X] Implementar `QuickSort`.
+    - [X] Implementar `MergeSort`.
 
 - [x] **Medición de Rendimiento:**
     - [ ] Ejecutar cada algoritmo de ordenamiento con los 3 conjuntos de datos (`500K`, `1M`, `10M`).
