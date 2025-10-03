@@ -35,7 +35,24 @@ def plot_results():
         print("Ensure the CSV has columns: Algorithm,Size,Time_ms")
         return
 
-    plt.figure(figsize=(12, 8))
+    # --- Vintage Newspaper Theme --- 
+    plt.rcParams['font.family'] = 'serif' # Use a serif font
+    fig, ax = plt.subplots(figsize=(12, 8))
+    background_color = '#FDFBF7' # A warm, antique white
+    text_color = '#2A2A2A' # A warm, brownish-gray for a softer, more integrated look
+    grid_color = '#DDDDDD' # A very light grey for subtle grid lines
+
+    fig.patch.set_facecolor(background_color)
+    ax.set_facecolor(background_color)
+
+    # Use the exact color palette provided by the user
+    color_map = {
+        'Radix Sort': '#6FA4AF',    # Teal/Aqua
+        'Quick Sort': '#B8C4A9',    # Sage Green
+        'Merge Sort': '#D97D55',    # Terracotta/Orange
+        'Counting Sort': '#A48A6F'  # A complementary brownish tone if needed
+    }
+    default_color = text_color # Default to text color if algorithm not in map
 
     for algorithm, data in results.items():
         # Aggregate results by size (e.g., calculate average time)
@@ -46,18 +63,38 @@ def plot_results():
         avg_sizes = sorted(aggregated_data.keys())
         avg_times = [sum(aggregated_data[size]) / len(aggregated_data[size]) for size in avg_sizes]
 
-        plt.plot(avg_sizes, avg_times, marker='o', linestyle='-', label=algorithm)
+        # Get the color from the map or use the default
+        plot_color = color_map.get(algorithm, default_color)
 
-    plt.title('Análisis de Rendimiento de Algoritmos de Ordenamiento')
-    plt.xlabel('Tamaño del Conjunto de Datos (N)')
-    plt.ylabel('Tiempo de Ejecución Promedio (ms)')
-    plt.legend()
-    plt.grid(True, which="both", ls="--")
-    plt.xscale('log')
-    plt.yscale('log')
-    plt.tight_layout()
+        ax.plot(avg_sizes, avg_times, marker='o', markersize=5, linestyle='-', label=algorithm, color=plot_color, linewidth=1.5)
 
-    plt.savefig(plot_path)
+    # --- Style Fonts, Titles, and Labels ---
+    ax.set_title('Análisis de Rendimiento de Algoritmos de Ordenamiento', color=text_color, fontsize=18, fontweight='bold')
+    ax.set_xlabel('Tamaño del Conjunto de Datos (N)', color=text_color, fontsize=12)
+    ax.set_ylabel('Tiempo de Ejecución Promedio (ms)', color=text_color, fontsize=12)
+
+    # --- Style Legend, Grid, and Spines ---
+    legend = ax.legend(frameon=True, shadow=False)
+    legend.get_frame().set_facecolor(background_color)
+    legend.get_frame().set_edgecolor(grid_color)
+    for text in legend.get_texts():
+        text.set_color(text_color)
+
+    ax.grid(True, which="both", linestyle=":", linewidth=0.6, color=grid_color)
+    ax.tick_params(axis='x', colors=text_color)
+    ax.tick_params(axis='y', colors=text_color)
+
+    # Remove top and right spines for a cleaner look
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_color(text_color)
+    ax.spines['bottom'].set_color(text_color)
+
+    ax.set_xscale('log')
+    ax.set_yscale('log')
+    fig.tight_layout()
+
+    plt.savefig(plot_path, dpi=300) # Increase DPI for better print quality
     print(f"Gráfico guardado como '{plot_path}'")
 
 if __name__ == '__main__':
