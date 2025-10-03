@@ -41,16 +41,16 @@ int main() {
     small_bench.run(radixSort, "Radix Sort");
     small_bench.run(quickSort, "Quick Sort");
     small_bench.run(mergeSort, "Merge Sort");
-    // medium_bench.run(radixSort, "Radix Sort");
-    // medium_bench.run(mergeSort, "Merge Sort");
-    // medium_bench.run(quickSort, "Quick Sort");
-    // big_bench.run(radixSort, "Radix Sort");
-    // big_bench.run(mergeSort, "Merge Sort");
-    // big_bench.run(quickSort, "Quick Sort");
+    medium_bench.run(radixSort, "Radix Sort");
+    medium_bench.run(mergeSort, "Merge Sort");
+    medium_bench.run(quickSort, "Quick Sort");
+    big_bench.run(radixSort, "Radix Sort");
+    big_bench.run(mergeSort, "Merge Sort");
+    big_bench.run(quickSort, "Quick Sort");
 
     small_bench.report();
-    // medium_bench.report();
-    // big_bench.report();
+    medium_bench.report();
+    big_bench.report();
   }
 
   std::cout << std::endl << "Presiona `q` para salir..." << std::endl;

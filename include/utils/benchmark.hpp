@@ -4,6 +4,7 @@
 #include <functional>
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 #include "structures/dataSet.hpp"
 #include "utils/rbenchmark.hpp"
@@ -12,9 +13,11 @@ class Benchmark {
 private:
   std::vector<RBenchmark> results;
   DataSet &data;
+  std::ofstream resultsFile;
 
 public:
   Benchmark(DataSet &);
+  ~Benchmark();
 
   std::vector<int>
   run(std::function<std::vector<int>(const std::vector<std::string> &)>

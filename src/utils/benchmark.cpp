@@ -5,7 +5,21 @@
 #include "structures/dataSet.hpp"
 #include "utils/benchmark.hpp"
 
-Benchmark::Benchmark(DataSet &data) : data(data) {};
+#include <filesystem>
+
+Benchmark::Benchmark(DataSet &data) : data(data) {
+  std::filesystem::create_directories("results");
+  resultsFile.open("results/results.csv", std::ios_base::app);
+  if(resultsFile.tellp() == 0) {
+    resultsFile << "Algorithm,Size,Time_ms\n";
+  }
+};
+
+Benchmark::~Benchmark() {
+  if (resultsFile.is_open()) {
+    resultsFile.close();
+  }
+}
 
 std::vector<int>
 Benchmark::run(std::function<std::vector<int>(const std::vector<std::string> &)>
@@ -24,6 +38,9 @@ Benchmark::run(std::function<std::vector<int>(const std::vector<std::string> &)>
         end_time - start_time);
 
     result.add(duration.count());
+    if (resultsFile.is_open()) {
+      resultsFile << name << "," << data.getSize() << "," << duration.count() << "\n";
+    }
   }
   results.push_back(result);
   return sorted;
