@@ -6,7 +6,7 @@ from collections import defaultdict
 def plot_results():
     results_dir = "results"
     csv_path = os.path.join(results_dir, "results.csv")
-    plot_path = os.path.join(results_dir, "benchmark_plot.png")
+    plot_path = os.path.join(results_dir, "benchmark_plot.svg")
 
     # Create results directory if it doesn't exist
     os.makedirs(results_dir, exist_ok=True)
@@ -38,7 +38,7 @@ def plot_results():
     # --- Vintage Newspaper Theme --- 
     plt.rcParams['font.family'] = 'serif' # Use a serif font
     fig, ax = plt.subplots(figsize=(12, 8))
-    background_color = '#FDFBF7' # A warm, antique white
+    background_color = '#FFF' # A warm, antique white
     text_color = '#2A2A2A' # A warm, brownish-gray for a softer, more integrated look
     grid_color = '#DDDDDD' # A very light grey for subtle grid lines
 
@@ -69,20 +69,20 @@ def plot_results():
         ax.plot(avg_sizes, avg_times, marker='o', markersize=5, linestyle='-', label=algorithm, color=plot_color, linewidth=1.5)
 
     # --- Style Fonts, Titles, and Labels ---
-    ax.set_title('Análisis de Rendimiento de Algoritmos de Ordenamiento', color=text_color, fontsize=18, fontweight='bold')
-    ax.set_xlabel('Tamaño del Conjunto de Datos (N)', color=text_color, fontsize=12)
-    ax.set_ylabel('Tiempo de Ejecución Promedio (ms)', color=text_color, fontsize=12)
+    # ax.set_title('Análisis de Rendimiento de Algoritmos de Ordenamiento', color=text_color, fontsize=20, fontweight='bold')
+    ax.set_xlabel('Tamaño del Conjunto de Datos (N)', color=text_color, fontsize=20)
+    ax.set_ylabel('Tiempo de Ejecución Promedio (ms)', color=text_color, fontsize=20)
 
     # --- Style Legend, Grid, and Spines ---
-    legend = ax.legend(frameon=True, shadow=False)
+    legend = ax.legend(frameon=True, shadow=True, fontsize=20)
     legend.get_frame().set_facecolor(background_color)
     legend.get_frame().set_edgecolor(grid_color)
     for text in legend.get_texts():
         text.set_color(text_color)
 
     ax.grid(True, which="both", linestyle=":", linewidth=0.6, color=grid_color)
-    ax.tick_params(axis='x', colors=text_color)
-    ax.tick_params(axis='y', colors=text_color)
+    ax.tick_params(axis='x', colors=text_color, labelsize=18)
+    ax.tick_params(axis='y', colors=text_color, labelsize=18)
 
     # Remove top and right spines for a cleaner look
     ax.spines['top'].set_visible(False)
@@ -94,7 +94,7 @@ def plot_results():
     ax.set_yscale('log')
     fig.tight_layout()
 
-    plt.savefig(plot_path, dpi=300) # Increase DPI for better print quality
+    plt.savefig(plot_path, dpi=500) # Increase DPI for better print quality
     print(f"Gráfico guardado como '{plot_path}'")
 
 if __name__ == '__main__':
