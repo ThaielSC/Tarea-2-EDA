@@ -18,10 +18,16 @@ void DataSet::load() {
   size = data.size();
 }
 
-void DataSet::showOrderBy(const std::vector<int>& sorted_indices) {
+void DataSet::showOrderBy(const std::vector<int> &sorted_indices, int limit) {
+  bool limitated = limit ? true : false;
   for (size_t index : sorted_indices) {
     if (index >= 0 && index < data.size()) {
       std::cout << data[index] << " ";
+    }
+    if (limitated) {
+      limit--;
+      if (!limit)
+        break;
     }
   }
   std::cout << std::endl;

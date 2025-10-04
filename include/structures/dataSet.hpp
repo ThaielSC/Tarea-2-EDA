@@ -5,23 +5,23 @@
 #include <vector>
 
 class DataSet {
- private:
+private:
   const std::string filePath;
   size_t size;
   std::vector<std::string> data;
 
- public:
-  DataSet(const std::string& filePath) : filePath(filePath), size(0) {}
+public:
+  DataSet(const std::string &filePath) : filePath(filePath), size(0) {}
 
   void load();
 
   size_t getSize() const { return size; }
 
-  const std::string& getFilePath() const { return filePath; }
+  const std::string &getFilePath() const { return filePath; }
 
-  std::vector<std::string>& getData() { return data; }
+  std::vector<std::string> &getData() { return data; }
 
-  void showOrderBy(const std::vector<int>& sorted_indices);
+  void showOrderBy(const std::vector<int> &sorted_indices, int limit = 0);
 };
 
 #endif
