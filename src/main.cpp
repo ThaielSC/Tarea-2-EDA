@@ -1,5 +1,6 @@
 #include <future>
 #include <iostream>
+#include <mutex>
 #include <vector>
 
 #include "algorithms/mergeSort.hpp"
@@ -12,13 +13,17 @@ int main() {
   std::vector<std::string> paths = {"data/codes_500K.txt", "data/codes_1M.txt",
                                     "data/codes_10M.txt"};
   std::vector<DataSet> datasets;
+  std::mutex cout_mutex;
 
   std::cout << "Cargando archivos:" << std::endl;
 
-  auto load_dataset = [](const std::string &path) {
-    std::cout << "  -> Cargando " << path << "..." << std::endl;
+  auto load_dataset = [&](const std::string &path) {
     DataSet ds(path);
     ds.load();
+    {
+      std::lock_guard<std::mutex> lock(cout_mutex);
+      std::cout << "  -> Cargado: " << path << "..." << std::endl;
+    }
     return ds;
   };
 

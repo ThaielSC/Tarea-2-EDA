@@ -26,8 +26,10 @@ void DataSet::showOrderBy(const std::vector<int> &sorted_indices, int limit) {
     }
     if (limitated) {
       limit--;
-      if (!limit)
+      if (!limit) {
+        std::cout << "...";
         break;
+      }
     }
   }
   std::cout << std::endl;

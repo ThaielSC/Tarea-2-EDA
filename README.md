@@ -17,7 +17,7 @@
     - [X] Ejecutar cada algoritmo de ordenamiento con los 3 conjuntos de datos (`500K`, `1M`, `10M`).
     - [X] Correr cada experimento 5 veces.
     - [X] Calcular el tiempo de ejecución promedio y la desviación estándar.
-    - [ ] Crear gráficos comparando rendimiento con base al dataset
+    - [X] Crear gráficos comparando rendimiento con base al dataset
 
 - [x] **README.md:**
     - [x] Añadir los pasos para compilar y ejecutar el proyecto.
